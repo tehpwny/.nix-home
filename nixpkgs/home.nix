@@ -152,16 +152,12 @@
         ping-interval = 5;
 
         accumulate-stats = true;
-
         format-connected-foreground = "#859900";
-
-        # label-connected = "%{A:cmst &:} %upspeed% %downspeed%%{A}";
-        label-connected = "%{A:cmst &:}%{A}";
-        label-connected-padding-left = 1;
-
-        format-disconnected-padding = 1;
+        label-connected = "  %upspeed%  %downspeed%%";
+        # label-connected = "%{A:cmst &:}%{A}";
+        label-connected-padding-left = 0;
+        format-disconnected-padding = 0;
         format-disconnected-foreground = "#b58900";
-
         label-disconnected = "%{A:cmst &:}%{A}";
       };
 
@@ -169,9 +165,19 @@
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         type = "internal/cpu";
         interval = 5;
-        format = "<label>";
-        label = "%{A:urxvt -e htop &:} %percentage%%%{A}";
+
+        format = "<label> <ramp-coreload>";
+        label = " %percentage%%%{A}";
         format-padding = 3;
+        ramp-coreload-spacing = 0;
+        ramp-coreload-0 = "▁";
+        ramp-coreload-1 = "▂";
+        ramp-coreload-2 = "▃";
+        ramp-coreload-3 = "▄";
+        ramp-coreload-4 = "▅";
+        ramp-coreload-5 = "▆";
+        ramp-coreload-6 = "▇";
+        ramp-coreload-7 = "█";
       };
 
       "module/ram" = {
@@ -190,41 +196,49 @@
       "module/battery" = {
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         type = "internal/battery";
-        full-at = 100;
+        full-at = 98;
         battery = "BAT0";
         adapter = "ACAD";
 
         time-format = "%H:%M";
         format-charging = "<animation-charging> <label-charging>";
         format-charging-padding = 1;
-
         format-charging-foreground = "#859900";
-
         format-discharging = "<ramp-capacity> <label-discharging>";
-
         format-full-padding = 1;
 
         label-charging = "%{F#b7b8b9}%percentage:2%%%{F-} %time%";
         label-discharging = "%percentage:2%% %time% %{o- -o}";
         label-full = "%{F#31a354}%{F-} %percentage%% %{F#d7a645}%{F-}";
 
-        ramp-capacity-0 = "%{F#e31a1c o#e31a1c +o} %{F-}";
-        ramp-capacity-1 = "%{F#e31a1c o#e31a1c +o} %{F-}";
-        ramp-capacity-2 = "%{F#d7a645 o#d7a645 +o} %{F-}";
-        ramp-capacity-3 = "{F#31a354 o#31a354 +o} %{F-}";
-        ramp-capacity-4 = "%{F#31a354 o#31a354 +o} %{F-}";
+        ramp-capacity-0 = "";
+        ramp-capacity-0-foreground = "#f53c3c";
+        ramp-capacity-1 = "";
+        ramp-capacity-1-foreground = "#ffa900";
+        ramp-capacity-2 = "";
+        ramp-capacity-3 = "";
+        ramp-capacity-4 = "";
 
+        bar-capacity-width = 10;
+        bar-capacity-format = "%{+u}%{+o}%fill%%empty%%{-u}%{-o}";
+        bar-capacity-fill = "█";
+        bar-capacity-fill-foreground = "#ddffffff";
+        bar-capacity-fill-font = 3;
+        bar-capacity-empty = "█";
+        bar-capacity-empty-font = "3";
+        bar-capacity-empty-foreground = "#44ffffff";
 
         animation-charging-0 = "";
         animation-charging-1 = "";
         animation-charging-2 = "";
         animation-charging-3 = "";
         animation-charging-4 = "";
+        animation-charging-framerate = 750;
       };
 
       "module/volumeintel" = {
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        type = "internal/volume";
+        type = "internal/alsa";
         format-volume = "<ramp-volume> <label-volume>";
         master-mixer = "Master";
         label-muted = " muted";
@@ -242,7 +256,6 @@
         type = "internal/fs";
         interval = "3600";
         mount-0 = "/home";
-
 
         format-mounted-padding = 1;
         format-mounted-prefix = "";
@@ -275,7 +288,6 @@
         format-prefix = "";
         format-prefix-foreground = "#756bb1";
 
-
         date = "%I:%M %p";
         date-alt = "%a, %d %b";
         label-padding-left = 1;
@@ -286,8 +298,8 @@
         type = "custom/menu";
         label-open = "";
         #          label-close = "x";
-        label-close = "X";
-        label-separator = "";
+        label-close = "";
+        label-separator = " | ";
         menu-0-0 = "reboot";
         menu-0-0-exec = "menu-open-1";
         menu-0-1 = "power off";
@@ -307,12 +319,12 @@
       "module/date" = {
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         type = "internal/date";
-        interval = 2;
+        interval = 1;
 
         date = "  %d.%m.%Y";
         date-alt = "  %A, %d. %B";
 
-        time = "%H:%M";
+        time = "%H:%M:%S";
         time-alt = "%H:%M:%S";
 
         format-underline = "#839496";
