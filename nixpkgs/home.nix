@@ -52,6 +52,7 @@
     viewnior
     dunst
     arandr
+    i3lock
     # i3status
     # polybar
     #(polybar.override {
