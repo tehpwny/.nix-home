@@ -42,7 +42,6 @@
 
     # i3wm additional packages
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    font-awesome
     rofi
     compton
     hsetroot
