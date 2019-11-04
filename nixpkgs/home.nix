@@ -112,14 +112,14 @@
         enable-scroll = false;
         strip-wsnumbers = true;
 
-        label-focused-padding = 1;
+        label-focused-padding = 0;
         label-focused-foreground = "#002b36";
         label-focused-background = "#b58900";
 
-        label-unfocused-padding = 1;
-        label-visible-padding = 1;
+        label-unfocused-padding = 0;
+        label-visible-padding = 0;
 
-        label-urgent-padding = 1;
+        label-urgent-padding = 0;
         label-urgent-background = "#dc322f";
         label-urgent-foreground = "#ffffff";
       };
