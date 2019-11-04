@@ -333,21 +333,62 @@
 
         format-background = "#002b36";
       };
+
+      "module/temperature" = {
+        type = "internal/temperature";
+        thermal-zone = 1;
+        base-temperature = 55;
+        warn-temperature = 75;
+
+        format = "<ramp> <label>";
+        # format-underline = "#f50a4d";
+        format-warn = "<ramp> <label-warn>";
+        # format-warn-underline = "#f50a4d";
+
+        label = "%temperature-c%";
+        label-warn = " %temperature-c%";
+        label-warn-foreground = "#f00";
+
+        ramp-0 = "";
+        ramp-1 = " ";
+        ramp-2 = " ";
+        ramp-3 = " ";
+        ramp-4 = "  ";
+        ramp-foreground = "#66";
+      };
+
+      "module/memory" = {
+        type = "internal/memory";
+        format = "<label> <ramp-used>";
+        format-prefix-foreground = "#268bd2";
+        label = " %percentage_used%%";
+        ramp-used-0 = "▁";
+        ramp-used-1 = "▂";
+        ramp-used-2 = "▃";
+        ramp-used-3 = "▄";
+        ramp-used-4 = "▅";
+        ramp-used-5 = "▆";
+        ramp-used-6 = "▇";
+        ramp-used-7 = "█";
+      };
+    # config end
     };
+    extraConfig = '' '';
       script = ''
 
         #!/usr/bin/env sh
 
         # Terminate already running bar instances
-        killall -q polybar
+        # killall -q polybar
+        kill -15 `ps aux |grep polybar |grep -v grep |awk '{print $2}'`>/dev/null
 
         # Wait until the processes have been shut down
         while pgrep -x polybar >/dev/null; do sleep 1; done
 
-          # Launch bars
-          for m in $(polybar --list-monitors | cut -d":" -f1); do
-              MONITOR=$m polybar bottom &
-          done
+       # Launch bars
+       for m in $(polybar --list-monitors | cut -d":" -f1); do
+         MONITOR=$m polybar top &
+       done
           '';
   };
   # git
