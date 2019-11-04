@@ -71,7 +71,7 @@
       githubSupport = true;
     };
     config = {
-      "bar/bottom" = {
+      "bar/top" = {
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         width = "100%";
         height = 32;
@@ -87,19 +87,20 @@
         font-5 = "Font Awesome 5 Brands:pixelsize=10;3";
 
         monitor = "eDP1";
-        bottom = true;
+        bottom = false;
 
         modules-left = "workspaces";
-        modules-center = "powermenu";
-        modules-right = "cpu ram root volumeintel backlight battery date wifi";
+        modules-center = "";
+        modules-right = "wifi temperature memory cpu root volumeintel backlight battery date powermenu";
 
         tray-position = "right";
-        tray-padding = 8;
+        tray-padding = 0;
         tray-reparent = true;
+        # tray-offset-x = 1;
 
         padding-left = 1;
         padding-right = 1;
-        module-margin-left = 1;
+        module-margin-left = 0;
         module-margin-right = 1;
       };
 
