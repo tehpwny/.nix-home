@@ -23,6 +23,8 @@
     firefox
     transmission
 
+    pavucontrol
+
     hermit
     source-code-pro
 
