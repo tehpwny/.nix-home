@@ -7,6 +7,11 @@
   nixpkgs.config.allowUnfree = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+
+  xdg.configFile."i3/config".source = ~/.nix-home/config/i3/config;
+  xdg.configFile."i3/wallpaper.png".source = ~/.nix-home/config/i3/wallpaper.png;
+
   home.packages = with pkgs; [
     # Common tools
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
