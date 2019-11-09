@@ -4,29 +4,65 @@
 { config, pkgs, ... }:
 
 {
+  imports =
+    [
+#      ./nur.nix
+    ];
+
   nixpkgs.config.allowUnfree = true;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # zsh
+  programs.zsh.enable = true;
+  programs.zsh.initExtra = ''
+                         export TERM="xterm-256color"
+                         source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-  xdg.configFile."i3/config".source = ~/.nix-home/config/i3/config;
-  xdg.configFile."i3/wallpaper.png".source = ~/.nix-home/config/i3/wallpaper.png;
+                         # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+                         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+                         bindkey "^[[1;5C" forward-word
+                         bindkey "^[[1;5D" backward-word
+  '';
+  # programs.zsh.enableAutosuggestions = true;
+  # programs.zsh.promptInit = "";
+
+  programs.zsh.oh-my-zsh.enable = true;
+  programs.zsh.oh-my-zsh.plugins = [ "git" "sudo" "python"];
+
+  # dotfiles
+  xdg.configFile."i3/config".source = ~/.nix-home/home/.config/i3/config;
+  xdg.configFile."i3/wallpaper.png".source = ~/.nix-home/home/.config/i3/wallpaper.png;
+  # xdg.configFile.".zshrc".source = ~/.nix-home/home/.zshrc;
 
   home.packages = with pkgs; [
     # Common tools
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     git
     emacs
     zsh
 
+    python38Full
+    python38Packages.setuptools
+    python38Packages.pip
+    python38Packages.subliminal
+    python38Packages.virtualenvwrapper
+    python38Packages.virtualenv
+    python38Packages.pudb
+
+    feh
     gimp
+
+    irssi
+
     firefox
     transmission
 
-    pavucontrol
+    vlc
 
-    hermit
-    source-code-pro
+    pavucontrol
 
     # Steam
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

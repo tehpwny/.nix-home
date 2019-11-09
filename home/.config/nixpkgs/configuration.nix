@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./i3wm.nix
+      ./nux.nix
     ];
 
   # SDD parameters
@@ -69,13 +70,14 @@
      	nano
 	    gnupg
 	    xorg.xmodmap
+
       htop
+      killall
    ];
   # fonts
   fonts.fonts = with pkgs; [
 	  font-awesome
     siji
-
   ];
   # Nvidia
   nixpkgs.config.allowUnfree = true;
@@ -104,6 +106,9 @@
   # Enable touchpad support.
   services.xserver.libinput.enable = true;
 
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.etc.current-nixos-config.source = ./.;
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
