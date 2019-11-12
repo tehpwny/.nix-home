@@ -14,6 +14,7 @@ exec --no-startup-id hsetroot -full ~/.config/i3/wallpaper.png
 exec --no-startup-id xsettingsd &
 exec --no-startup-id compton -b
 exec --no-startup-id polybar top &
+exec --no-startup-id nm-applet &
 # exec --no-startup-id xrandr --output eDP1 --mode 1920x1080
 exec --no-startup-id xmodmap -e "keysym Alt_R = Multi_key"
 
